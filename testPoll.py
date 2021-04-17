@@ -51,11 +51,14 @@ def start(update: Update, _: CallbackContext) -> None:
 def add(update: Update, context: CallbackContext) -> None:
 	
 	def getCallsign(userinput):
-		callsign = "Callsign: " + userinput
-		return callsign[4:]
+		return userinput[4:]
 
 	userinput = update.message.text
 	update.message.reply_text(getCallsign(userinput))
+
+	textfile = open("flightMembers.txt", "w")
+	textfile.write(userinput+"\n")
+	textfile.close()
 
 
 # def poll(update: Update, context: CallbackContext) -> None:

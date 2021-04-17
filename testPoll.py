@@ -8,27 +8,26 @@ poll/quiz the bot generates. The preview command generates a closed poll/quiz, e
 one the user sends the bot
 """
 import logging
-import telegram
-import telegram.ext
 
-# from telegram import (
-#     Poll,
-#     ParseMode,
-#     KeyboardButton,
-#     KeyboardButtonPollType,
-#     ReplyKeyboardMarkup,
-#     ReplyKeyboardRemove,
-#     Update,
-# )
-# from telegram.ext import (
-#     Updater,
-#     CommandHandler,
-#     PollAnswerHandler,
-#     PollHandler,
-#     MessageHandler,
-#     Filters,
-#     CallbackContext,
-# )
+from telegram import (
+    Poll,
+    ParseMode,
+    KeyboardButton,
+    KeyboardButtonPollType,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+    Update,
+)
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    PollAnswerHandler,
+    PollHandler,
+    MessageHandler,
+    Filters,
+    CallbackContext,
+    PicklePersistence,
+)
 
 #added for deployment to heroku
 import os

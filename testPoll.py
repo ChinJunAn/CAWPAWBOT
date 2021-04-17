@@ -32,10 +32,14 @@ from telegram.ext import (
 import os
 PORT = int(os.environ.get('PORT', 5000))
 
+
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 logger = logging.getLogger(__name__)
+
+TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 
 
 def start(update: Update, _: CallbackContext) -> None:
@@ -156,7 +160,7 @@ def help_handler(update: Update, _: CallbackContext) -> None:
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    updater = Updater("TOKEN")
+    updater = Updater(TOKEN)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('poll', poll))
@@ -171,10 +175,8 @@ def main() -> None:
     #updater.start_polling()
 
     #added to deploy to heroku
-    updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
-	updater.bot.setWebhook('https://cawpawbot.herokuapp.com/' + '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY')
+    updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
+    updater.bot.setWebhook('https://cawpawbot.herokuapp.com/'+TOKEN)
 
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT

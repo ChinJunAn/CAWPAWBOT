@@ -9,7 +9,7 @@ one the user sends the bot
 """
 import logging
 import telegram
-import telgram.ext
+import telegram.ext
 
 # from telegram import (
 #     Poll,

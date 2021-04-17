@@ -46,17 +46,13 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
-        '/edit to edit flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
+        'To update flight members, enter in the following format: \n#\nperson1\nperson2\n.\n.\n.\n/cawpaw <date> to begin recording parade state for specified date'
     )
-
-def edit(update: Update, context: CallbackContext) -> None:
-	
-	update.message.reply_markdown_v2("Enter everyones' callsign in the following format: \n#\nperson1\nperson2\n.\n.\n.",reply_markup=ForceReply(selective=True))
 
 def updateMembers(update: Update, context: CallbackContext) -> None:
 
 	members = update.message.text.split("\n")
-	context.chat_data["flightMembers"] = members
+	context.chat_data["flightMembers"] = members.pop(0)
 
 def members(update: Update, context: CallbackContext) -> None:
 	
@@ -178,8 +174,7 @@ def main() -> None:
     updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(CommandHandler('edit', edit))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^#\n"), updateMembers))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^*\n"), updateMembers))
     dispatcher.add_handler(CommandHandler('members', members))
 
 

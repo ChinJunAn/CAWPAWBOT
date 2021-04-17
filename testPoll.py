@@ -46,10 +46,10 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
-        '/update to update flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
+        '/edit to edit flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
     )
 
-def update(update: Update, context: CallbackContext) -> None:
+def edit(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_markdown_v2("Enter everyones' callsign",reply_markup=ForceReply(selective=True))
 
@@ -178,7 +178,7 @@ def main() -> None:
     updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(CommandHandler('update', update))
+    dispatcher.add_handler(CommandHandler('edit', edit))
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, updateMembers))
     dispatcher.add_handler(CommandHandler('members', members))
 

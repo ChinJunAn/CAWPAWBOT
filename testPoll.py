@@ -70,7 +70,7 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	
 	keyboard = [
 		[
-			context.chat_data["flightMembers"](0),
+			context.chat_data["flightMembers"][0],
 			InlineKeyboardButton("Option 1", callback_data='1'),
 			InlineKeyboardButton("Option 2", callback_data='2'),
 		],

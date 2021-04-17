@@ -45,7 +45,7 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
-        '/add to add flight members \n/remove to remove flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
+        '/add <callsign> to add flight members \n/remove to remove flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
     )
 
 def add(update: Update, context: CallbackContext) -> None:
@@ -54,7 +54,7 @@ def add(update: Update, context: CallbackContext) -> None:
 		return userinput[4:]
 
 	userinput = update.message.text
-	update.message.reply_text(getCallsign(userinput))
+	update.message.reply_text(getCallsign(userinput)+"was added")
 
 	textfile = open("flightMembers.txt", "w")
 	textfile.write(userinput+"\n")

@@ -52,14 +52,14 @@ def start(update: Update, _: CallbackContext) -> None:
 def add(update: Update, context: CallbackContext) -> None:
 	
 	def getCallsign(userinput):
-		return userinput[4:]
+		return userinput[5:]
 
 	callsign = update.message.text
 	update.message.reply_text("\""+getCallsign(callsign)+"\" was added")
 
 	context.chat_data[callsign] = callsign
 
-def members (update: Update, context: CallbackContext) -> None:
+def members(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_text(context.chat_data)
 
@@ -180,7 +180,7 @@ def main() -> None:
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text,add))
-    # dispatcher.add_handler(CommandHandler('add', add))
+    dispatcher.add_handler(CommandHandler('members', members))
 
 
     # dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))

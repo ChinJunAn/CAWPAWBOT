@@ -30,7 +30,7 @@ from telegram.ext import (
 
 #added for deployment to heroku
 import os
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', 443))
 
 
 
@@ -175,8 +175,8 @@ def main() -> None:
     #updater.start_polling()
 
     #added to deploy to heroku
-    updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
-    updater.bot.setWebhook('https://cawpawbot.herokuapp.com/'+TOKEN)
+    updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN,webhook_url='https://cawpawbot.herokuapp.com/'+TOKEN)
+    #updater.bot.setWebhook(webhook_url='https://cawpawbot.herokuapp.com/'+TOKEN)
 
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT

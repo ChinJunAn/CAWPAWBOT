@@ -46,22 +46,21 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
-        '/add <callsign> to add flight members \n/remove to remove flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
+        '/update to update flight members \n/members show flight members \n/cawpaw <date> to begin recording parade state for specified date'
     )
 
-def add(update: Update, context: CallbackContext) -> None:
+def update(update: Update, context: CallbackContext) -> None:
 	
-	def getCallsign(userinput):
-		return userinput[5:]
+	update.message.reply_markdown_v2("Enter everyones' callsign",reply_markup=ForceReply(selective=True))
 
-	callsign = update.message.text
-	update.message.reply_text("\""+getCallsign(callsign)+"\" was added")
+def updateMembers(update: Update, context: CallbackContext) -> None:
 
-	context.chat_data[callsign] = callsign
+	members = update.message.text.split("\n")
+	context.chat_data["flightMembers"] = members
 
 def members(update: Update, context: CallbackContext) -> None:
 	
-	update.message.reply_text(context.chat_data)
+	update.message.reply_text(context.chat_data["flightMembers"])
 
 
 
@@ -170,7 +169,7 @@ def members(update: Update, context: CallbackContext) -> None:
 
 def help_handler(update: Update, _: CallbackContext) -> None:
     """Display a help message"""
-    update.message.reply_text('/initialise to add update flight members \n /cawpaw <date> to begin recording parade state for specified date')
+    update.message.reply_text('help')
 
 
 def main() -> None:
@@ -179,7 +178,7 @@ def main() -> None:
     updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(MessageHandler(Filters.text,add))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, updateMembers))
     dispatcher.add_handler(CommandHandler('members', members))
 
 

@@ -8,25 +8,27 @@ poll/quiz the bot generates. The preview command generates a closed poll/quiz, e
 one the user sends the bot
 """
 import logging
+import telegram
+import telgram.ext
 
-from telegram import (
-    Poll,
-    ParseMode,
-    KeyboardButton,
-    KeyboardButtonPollType,
-    ReplyKeyboardMarkup,
-    ReplyKeyboardRemove,
-    Update,
-)
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    PollAnswerHandler,
-    PollHandler,
-    MessageHandler,
-    Filters,
-    CallbackContext,
-)
+# from telegram import (
+#     Poll,
+#     ParseMode,
+#     KeyboardButton,
+#     KeyboardButtonPollType,
+#     ReplyKeyboardMarkup,
+#     ReplyKeyboardRemove,
+#     Update,
+# )
+# from telegram.ext import (
+#     Updater,
+#     CommandHandler,
+#     PollAnswerHandler,
+#     PollHandler,
+#     MessageHandler,
+#     Filters,
+#     CallbackContext,
+# )
 
 #added for deployment to heroku
 import os
@@ -53,12 +55,15 @@ def add(update: Update, context: CallbackContext) -> None:
 	def getCallsign(userinput):
 		return userinput[4:]
 
-	userinput = update.message.text
-	update.message.reply_text(getCallsign(userinput)+"was added")
+	callsign = update.message.text
+	update.message.reply_text("\""+getCallsign(callsign)+"\" was added")
 
-	textfile = open("flightMembers.txt", "w")
-	textfile.write(userinput+"\n")
-	textfile.close()
+	context.chat_data[callsign] = callsign
+
+def members (update: Update, context: CallbackContext) -> None:
+	
+	update.message.reply_text(context.chat_data)
+
 
 
 # def poll(update: Update, context: CallbackContext) -> None:
@@ -171,7 +176,8 @@ def help_handler(update: Update, _: CallbackContext) -> None:
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    updater = Updater(TOKEN)
+    persistence = PicklePersistence(filename="CAWPAWBOT")
+    updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text,add))

@@ -52,7 +52,7 @@ def start(update: Update, _: CallbackContext) -> None:
 def updateMembers(update: Update, context: CallbackContext) -> None:
 
 	members = update.message.text.split("\n")
-	context.chat_data["flightMembers"] = members.pop(0)
+	context.chat_data["flightMembers"] = members
 
 def members(update: Update, context: CallbackContext) -> None:
 	

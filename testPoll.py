@@ -62,16 +62,14 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 #can remove after done
 def members(update: Update, context: CallbackContext) -> None:
 	
-	update.message.reply_text(context.chat_data["flightMembers"])
+	update.message.reply_text(context.chat_data["flightMembers"][0])
 
 
 
 def cawpaw(update: Update, context: CallbackContext) -> None:
-	
-	name = context.chat_data["flightMembers"][0]
 
 	keyboard = [
-		[InlineKeyboardButton(name)],
+		[InlineKeyboardButton(context.chat_data["flightMembers"][0])],
 		[
 			#context.chat_data["flightMembers"][0],
 			InlineKeyboardButton("Option 1", callback_data='1'),

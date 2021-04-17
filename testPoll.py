@@ -17,6 +17,9 @@ from telegram import (
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
     Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+
 )
 from telegram.ext import (
     Updater,
@@ -27,6 +30,7 @@ from telegram.ext import (
     Filters,
     CallbackContext,
     PicklePersistence,
+    CallbackQueryHandler,
 )
 
 #added for deployment to heroku
@@ -46,40 +50,35 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
-        'To update flight members, enter in the following format: \n#\nperson1\nperson2\n.\n.\n.\n/cawpaw <date> to begin recording parade state for specified date'
+        'To update flight members, enter in the following format: \n\n!!\nperson1\nperson2\n.\n.\n.\n\n/cawpaw <date> to begin recording parade state for the specified date'
     )
 
 def updateMembers(update: Update, context: CallbackContext) -> None:
 
 	members = update.message.text.split("\n")
+	del members[0]
 	context.chat_data["flightMembers"] = members
 
+#can remove after done
 def members(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_text(context.chat_data["flightMembers"])
 
 
 
-# def poll(update: Update, context: CallbackContext) -> None:
-#     """Sends a predefined poll"""
-#     questions = ["Good", "Really good", "Fantastic", "Great"]
-#     message = context.bot.send_poll(
-#         update.effective_chat.id,
-#         "How are you?",
-#         questions,
-#         is_anonymous=False,
-#         allows_multiple_answers=True,
-#     )
-#     # Save some info about the poll the bot_data for later use in receive_poll_answer
-#     payload = {
-#         message.poll.id: {
-#             "questions": questions,
-#             "message_id": message.message_id,
-#             "chat_id": update.effective_chat.id,
-#             "answers": 0,
-#         }
-#     }
-#     context.bot_data.update(payload)
+def cawpaw(update: Update, context: CallbackContext) -> None:
+	
+	keyboard = [
+		[
+			InlineKeyboardButton("Option 1", callback_data='1'),
+			InlineKeyboardButton("Option 2", callback_data='2'),
+		],
+		[InlineKeyboardButton("Option 3", callback_data='3')],
+	]
+	reply_markup = InlineKeyboardMarkup(keyboard)
+	update.message.reply_text('Please choose:', reply_markup=reply_markup)
+
+   
 
 
 # def receive_poll_answer(update: Update, context: CallbackContext) -> None:
@@ -175,6 +174,7 @@ def main() -> None:
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^!!\n"), updateMembers))
+    #can remove when done
     dispatcher.add_handler(CommandHandler('members', members))
 
 

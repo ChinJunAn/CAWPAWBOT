@@ -176,6 +176,7 @@ def main() -> None:
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^!!\n"), updateMembers))
     #can remove when done
     dispatcher.add_handler(CommandHandler('members', members))
+    dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
 
 
     # dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))

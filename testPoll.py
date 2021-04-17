@@ -178,6 +178,7 @@ def main() -> None:
     updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
+    dispatcher.add_handler(CommandHandler('update', update))
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, updateMembers))
     dispatcher.add_handler(CommandHandler('members', members))
 

@@ -51,7 +51,7 @@ def start(update: Update, _: CallbackContext) -> None:
 
 def edit(update: Update, context: CallbackContext) -> None:
 	
-	update.message.reply_markdown_v2("Enter everyones' callsign",reply_markup=ForceReply(selective=True))
+	update.message.reply_markdown_v2("Enter everyones' callsign in the following format: \n#\nperson1\nperson2\n.\n.\n.",reply_markup=ForceReply(selective=True))
 
 def updateMembers(update: Update, context: CallbackContext) -> None:
 
@@ -179,7 +179,7 @@ def main() -> None:
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('edit', edit))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, updateMembers))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^#\n"), updateMembers))
     dispatcher.add_handler(CommandHandler('members', members))
 
 

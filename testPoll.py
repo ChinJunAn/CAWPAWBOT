@@ -103,7 +103,7 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name
-		[InlineKeyboardButton(x, callback_data = None)]
+		[InlineKeyboardButton(x, callback_data = '0')]
 		)
 		keyboard.append(
 		#options
@@ -122,7 +122,7 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
-def button(update: Update, _: CallbackContext) -> None:
+#def button(update: Update, _: CallbackContext) -> None:
 
 	query = update.callback_query
 	query.answer()

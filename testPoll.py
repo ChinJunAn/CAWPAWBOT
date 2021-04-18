@@ -103,13 +103,11 @@ def members(update: Update, context: CallbackContext) -> None:
 		# InlineKeyboardButton("CSE", callback_data='1'),
 		# InlineKeyboardButton("OS", callback_data='1'),
 
-keyboard = []
-date = "___"
-
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
 	index = 0
+	keyboard = []
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name

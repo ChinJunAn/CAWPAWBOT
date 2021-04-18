@@ -68,6 +68,8 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text
 
+	del date[8]
+
 	keyboard = []
 
 	# for x in context.chat_data["flightMembers"]:

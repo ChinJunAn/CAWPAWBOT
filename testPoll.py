@@ -77,24 +77,6 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 		)
 		index += 1
 
-#can remove after done
-def members(update: Update, context: CallbackContext) -> None:
-	
-	update.message.reply_text(context.chat_data["flightMembers"])
-
-# #keyboard = []
-# date = "___"
-# def cawpaw(update: Update, context: CallbackContext) -> None:
-
-# 	date = update.message.text[8:]
-# 	index = 0
-# 	for x in context.chat_data["flightMembers"]:
-# 		keyboard.append(
-# 		#name
-# 		[InlineKeyboardButton(x, callback_data = 1)]
-# 		)
-# 		keyboard.append(
-# 		InlineKeyboardButton("test option", callback_data=1),
 # 		#options
 # 		# [
 		# InlineKeyboardButton("AM", callback_data=str(index+',0,AM \u2714') ),
@@ -106,21 +88,11 @@ def members(update: Update, context: CallbackContext) -> None:
 		# InlineKeyboardButton("OS", callback_data=str(index+',6,OS \u2714') ),
 # 		# ],
 # 		)
-# 		index += 1
 
-# 	reply_markup = InlineKeyboardMarkup(keyboard)
-# 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
-
-
-		# InlineKeyboardButton("AM", callback_data='1'),
-		# InlineKeyboardButton("PM", callback_data='1'),
-		# InlineKeyboardButton("IN", callback_data='1'),
-		# InlineKeyboardButton("OFF", callback_data='1'),
-		# InlineKeyboardButton("LVE", callback_data='1'),
-		# InlineKeyboardButton("MC", callback_data='1'),
-		# InlineKeyboardButton("CSE", callback_data='1'),
-		# InlineKeyboardButton("OS", callback_data='1'),
-
+#can remove after done
+def members(update: Update, context: CallbackContext) -> None:
+	
+	update.message.reply_text(context.chat_data["flightMembers"])
 
 
 def cawpaw(update: Update, context: CallbackContext) -> None:
@@ -139,7 +111,7 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 
 	target = query.data
 
-	keyboard[target[0]][target[1]] = InlineKeyboardButton(target[2],callback_data='none')
+	keyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)

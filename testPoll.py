@@ -78,13 +78,13 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 		keyboard.append(
 		#options
 		[
-		InlineKeyboardButton("AM", callback_data=[index,'0','AM \u2714']),
-		InlineKeyboardButton("PM", callback_data=[index,'1','PM \u2714']),
-		InlineKeyboardButton("IN", callback_data=[index,'2','IN \u2714']),
-		InlineKeyboardButton("OFF", callback_data=[index,'3','OFF \u2714']),
-		InlineKeyboardButton("MC", callback_data=[index,'4','MC \u2714']),
-		InlineKeyboardButton("CSE", callback_data=[index,'5','CSE \u2714']),
-		InlineKeyboardButton("OS", callback_data=[index,'6','OS \u2714']),
+		InlineKeyboardButton("AM", callback_data=str(index,'0','AM \u2714') ),
+		InlineKeyboardButton("PM", callback_data=str(index,'1','PM \u2714') ),
+		InlineKeyboardButton("IN", callback_data=str(index,'2','IN \u2714') ),
+		InlineKeyboardButton("OFF", callback_data=str(index,'3','OFF \u2714') ),
+		InlineKeyboardButton("MC", callback_data=str(index,'4','MC \u2714') ),
+		InlineKeyboardButton("CSE", callback_data=str(index,'5','CSE \u2714') ),
+		InlineKeyboardButton("OS", callback_data=str(index,'6','OS \u2714') ),
 		],
 		)
 		index += 1
@@ -97,7 +97,7 @@ def button(update: Update, _: CallbackContext) -> None:
 	query = update.callback_query
 	query.answer()
 
-	target = query.data
+	target = query.data.split(',')
 
 	keyboard[target[0]][target[1]] = InlineKeyboardButton(target[2],callback_data=None)
 

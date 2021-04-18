@@ -74,19 +74,20 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name
-		[InlineKeyboardButton(x, callback_data = None)]
+		[InlineKeyboardButton(x, callback_data = 1)]
 		)
 		keyboard.append(
+		InlineKeyboardButton("test option", callback_data=1),
 		#options
-		[
-		InlineKeyboardButton("AM", callback_data=str(index,'0','AM \u2714') ),
-		InlineKeyboardButton("PM", callback_data=str(index,'1','PM \u2714') ),
-		InlineKeyboardButton("IN", callback_data=str(index,'2','IN \u2714') ),
-		InlineKeyboardButton("OFF", callback_data=str(index,'3','OFF \u2714') ),
-		InlineKeyboardButton("MC", callback_data=str(index,'4','MC \u2714') ),
-		InlineKeyboardButton("CSE", callback_data=str(index,'5','CSE \u2714') ),
-		InlineKeyboardButton("OS", callback_data=str(index,'6','OS \u2714') ),
-		],
+		# [
+		# InlineKeyboardButton("AM", callback_data=str(index,'0','AM \u2714') ),
+		# InlineKeyboardButton("PM", callback_data=str(index,'1','PM \u2714') ),
+		# InlineKeyboardButton("IN", callback_data=str(index,'2','IN \u2714') ),
+		# InlineKeyboardButton("OFF", callback_data=str(index,'3','OFF \u2714') ),
+		# InlineKeyboardButton("MC", callback_data=str(index,'4','MC \u2714') ),
+		# InlineKeyboardButton("CSE", callback_data=str(index,'5','CSE \u2714') ),
+		# InlineKeyboardButton("OS", callback_data=str(index,'6','OS \u2714') ),
+		# ],
 		)
 		index += 1
 

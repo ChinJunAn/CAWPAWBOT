@@ -102,11 +102,9 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
 	tempKeyboard.clear()
-	tempKeyboard = keyboard
+	tempKeyboard.append(keyboard)
 	reply_markup = InlineKeyboardMarkup(tempKeyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
-
-
 
 def addCheck(update: Update, _: CallbackContext) -> None:
 
@@ -114,6 +112,10 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	query.answer()
 
 	target = query.data.split(',')
+
+	#check if callback data returns with check or no check
+	#if have check, add check 
+	#if no have check, remove check
 
 	tempKeyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 

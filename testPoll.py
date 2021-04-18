@@ -48,7 +48,6 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 
 
 keyboard = []
-tempKeyboard = []
 date = "___"
 
 def start(update: Update, _: CallbackContext) -> None:
@@ -69,23 +68,24 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 		keyboard.append(
 		#name
 		[InlineKeyboardButton(x, callback_data = 'none')]
+		)
+		keyboard.append(
 		#options
 		[
-			InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714'),
-			InlineKeyboardButton("PM", callback_data=str(index)+',1,PM \u2714')
-		]
+		InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714'),
+		],
 		)
 		index += 1
 
 # 		#options
 # 		# [
-		# InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714') ),
-		# InlineKeyboardButton("PM", callback_data=str(index)+',1,PM \u2714') ),
-		# InlineKeyboardButton("IN", callback_data=str(index)+',2,IN \u2714') ),
-		# InlineKeyboardButton("OFF", callback_data=str(index)+',3,OFF \u2714') ),
-		# InlineKeyboardButton("MC", callback_data=str(index)+',4,MC \u2714') ),
-		# InlineKeyboardButton("CSE", callback_data=str(index)+',5,CSE \u2714') ),
-		# InlineKeyboardButton("OS", callback_data=str(index)+',6,OS \u2714') ),
+		# InlineKeyboardButton("AM", callback_data=str(index+',0,AM \u2714') ),
+		# InlineKeyboardButton("PM", callback_data=str(index+',1,PM \u2714') ),
+		# InlineKeyboardButton("IN", callback_data=str(index+',2,IN \u2714') ),
+		# InlineKeyboardButton("OFF", callback_data=str(index+',3,OFF \u2714') ),
+		# InlineKeyboardButton("MC", callback_data=str(index+',4,MC \u2714') ),
+		# InlineKeyboardButton("CSE", callback_data=str(index+',5,CSE \u2714') ),
+		# InlineKeyboardButton("OS", callback_data=str(index+',6,OS \u2714') ),
 # 		# ],
 # 		)
 
@@ -98,7 +98,7 @@ def members(update: Update, context: CallbackContext) -> None:
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	#tempKeyboard = keyboard
+	
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
@@ -108,8 +108,13 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 
 	query = update.callback_query
 	query.answer()
+
 	target = query.data.split(',')
-	keyboard[int(target[0])] [int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
+
+
+
+
+	keyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)

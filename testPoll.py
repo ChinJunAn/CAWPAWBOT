@@ -66,7 +66,7 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 	keyboard.clear()
 	for x in context.chat_data["flightMembers"]:
 		option1 = index + 1
-		option2 = option1 + 2
+		option2 = option1 + 1
 		keyboard.append(
 		#name
 		[InlineKeyboardButton(x, callback_data = 'none')]

@@ -101,6 +101,7 @@ def members(update: Update, context: CallbackContext) -> None:
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
+	tempKeyboard.clear()
 	tempKeyboard = keyboard.copy()
 	reply_markup = InlineKeyboardMarkup(tempKeyboard)
 	#reply_markup = InlineKeyboardMarkup(keyboard)

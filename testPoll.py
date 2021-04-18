@@ -69,7 +69,24 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	date = update.message.text[8:]
 
 	keyboard = [
-		[InlineKeyboardButton(context.chat_data["flightMembers"][0], callback_data ='0')],
+		# [InlineKeyboardButton(context.chat_data["flightMembers"][0], callback_data ='0')],
+		# [
+		# InlineKeyboardButton("AM", callback_data='1'),
+		# InlineKeyboardButton("PM", callback_data='1'),
+		# InlineKeyboardButton("IN", callback_data='1'),
+		# InlineKeyboardButton("OFF", callback_data='1'),
+		# InlineKeyboardButton("LVE", callback_data='1'),
+		# InlineKeyboardButton("CSE", callback_data='1'),
+		# InlineKeyboardButton("OS", callback_data='1'),
+		# ],
+
+	]
+
+	for x in context.chat_data["flightMembers"]:
+		keyboard.append(
+		#name
+		[InlineKeyboardButton(x, callback_data ='0')],
+		#options
 		[
 		InlineKeyboardButton("AM", callback_data='1'),
 		InlineKeyboardButton("PM", callback_data='1'),
@@ -79,24 +96,7 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 		InlineKeyboardButton("CSE", callback_data='1'),
 		InlineKeyboardButton("OS", callback_data='1'),
 		],
-
-	]
-
-	# for x in context.chat_data["flightMembers"]:
-	# 	keyboard.append(
-	# 	#name
-	# 	[InlineKeyboardButton(context.chat_data["flightMembers"][x], callback_data ='0')],
-	# 	#options
-	# 	[
-	# 	InlineKeyboardButton("AM", callback_data='1'),
-	# 	InlineKeyboardButton("PM", callback_data='1'),
-	# 	InlineKeyboardButton("In", callback_data='1'),
-	# 	InlineKeyboardButton("OFF", callback_data='1'),
-	# 	InlineKeyboardButton("LVE", callback_data='1'),
-	# 	InlineKeyboardButton("CSE", callback_data='1'),
-	# 	InlineKeyboardButton("OS", callback_data='1'),
-	# 	],
-	# 	)
+		)
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')

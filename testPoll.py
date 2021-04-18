@@ -48,6 +48,7 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 
 
 keyboard = []
+tempKeyboard = []
 date = "___"
 
 def start(update: Update, _: CallbackContext) -> None:
@@ -107,14 +108,10 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 
 	query = update.callback_query
 	query.answer()
-
-	tempKeyboard = keyboard
-
 	target = query.data.split(',')
-
 	tempKeyboard[int(target[0])] [int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 
-	reply_markup = InlineKeyboardMarkup(keyboard)
+	reply_markup = InlineKeyboardMarkup(tempKeyboard)
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 	#query.edit_message_text(text=target)
 	query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')

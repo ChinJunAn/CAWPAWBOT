@@ -63,22 +63,7 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 	del members[0]
 	context.chat_data["flightMembers"] = members
 
-	index = 0
-	keyboard.clear()
-	for x in context.chat_data["flightMembers"]:
-		optionindex = index + 1
-		keyboard.append(
-		#name
-		[InlineKeyboardButton(x, callback_data = 'none')]
-		)
-		keyboard.append(
-		#options
-		[
-		InlineKeyboardButton("AM", callback_data=str(optionindex)+',0,AM \u2714'),
-		InlineKeyboardButton("PM", callback_data=str(optionindex)+',1,PM \u2714')
-		],
-		)
-		index = optionindex + 1
+	
 
 # 		#options
 # 		# [
@@ -101,10 +86,28 @@ def members(update: Update, context: CallbackContext) -> None:
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	#tempKeyboard.clear()
-	tempKeyboard = keyboard.copy()
-	reply_markup = InlineKeyboardMarkup(tempKeyboard)
-	#reply_markup = InlineKeyboardMarkup(keyboard)
+
+	# tempKeyboard = keyboard.copy()
+	# reply_markup = InlineKeyboardMarkup(tempKeyboard)
+
+	index = 0
+	keyboard.clear()
+	for x in context.chat_data["flightMembers"]:
+		optionindex = index + 1
+		keyboard.append(
+		#name
+		[InlineKeyboardButton(x, callback_data = 'none')]
+		)
+		keyboard.append(
+		#options
+		[
+		InlineKeyboardButton("AM", callback_data=str(optionindex)+',0,AM \u2714'),
+		InlineKeyboardButton("PM", callback_data=str(optionindex)+',1,PM \u2714')
+		],
+		)
+		index = optionindex + 1
+	reply_markup = InlineKeyboardMarkup(keyboard)
+
 
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
@@ -118,12 +121,12 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	#if have check, add check 
 	#if no have check, remove check
 
-	tempKeyboard = keyboard.copy()
-	tempKeyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
-	#keyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
+	# tempKeyboard = keyboard.copy()
+	# tempKeyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
+	keyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 
-	reply_markup = InlineKeyboardMarkup(tempKeyboard)
-	#reply_markup = InlineKeyboardMarkup(keyboard)
+	#reply_markup = InlineKeyboardMarkup(tempKeyboard)
+	reply_markup = InlineKeyboardMarkup(keyboard)
 
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 	#query.edit_message_text(text=target)

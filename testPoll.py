@@ -79,13 +79,14 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 		# InlineKeyboardButton("CSE", callback_data='1'),
 		# InlineKeyboardButton("OS", callback_data='1'),
 		# ],
-
 	]
 
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name
-		[InlineKeyboardButton(x, callback_data ='0')],
+		[InlineKeyboardButton(x, callback_data ='0')]
+		)
+		keyboard.append(
 		#options
 		[
 		InlineKeyboardButton("AM", callback_data='1'),

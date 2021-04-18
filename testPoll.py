@@ -47,6 +47,9 @@ logger = logging.getLogger(__name__)
 TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 
 
+keyboard = []
+date = "___"
+
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
@@ -58,6 +61,21 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 	members = update.message.text.split("\n")
 	del members[0]
 	context.chat_data["flightMembers"] = members
+
+	index = 0
+	#keyboard = []
+	for x in context.chat_data["flightMembers"]:
+		keyboard.append(
+		#name
+		[InlineKeyboardButton(x, callback_data = 'none')]
+		)
+		keyboard.append(
+		#options
+		[
+		InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714'),
+		],
+		)
+		index += 1
 
 #can remove after done
 def members(update: Update, context: CallbackContext) -> None:
@@ -103,35 +121,14 @@ def members(update: Update, context: CallbackContext) -> None:
 		# InlineKeyboardButton("CSE", callback_data='1'),
 		# InlineKeyboardButton("OS", callback_data='1'),
 
-keyboard = []
-date = "___"
+
 
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	index = 0
-	#keyboard = []
-	for x in context.chat_data["flightMembers"]:
-		keyboard.append(
-		#name
-		[InlineKeyboardButton(x, callback_data = 'none')]
-		)
-		keyboard.append(
-		#options
-		[
-		InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714'),
-		],
-		)
-		index += 1
-
+	
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
-
-
-
-
-
-
 
 
 

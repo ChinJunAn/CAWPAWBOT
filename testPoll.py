@@ -64,129 +64,45 @@ def members(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_text(context.chat_data["flightMembers"])
 
+keyboard = []
+date = "___"
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-
-	keyboard = [
-		# [InlineKeyboardButton(context.chat_data["flightMembers"][0], callback_data ='0')],
-		# [
-		# InlineKeyboardButton("AM", callback_data='1'),
-		# InlineKeyboardButton("PM", callback_data='1'),
-		# InlineKeyboardButton("IN", callback_data='1'),
-		# InlineKeyboardButton("OFF", callback_data='1'),
-		# InlineKeyboardButton("LVE", callback_data='1'),
-		# InlineKeyboardButton("CSE", callback_data='1'),
-		# InlineKeyboardButton("OS", callback_data='1'),
-		# ],
-	]
-
+	index = 0
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name
-		[InlineKeyboardButton(x, callback_data ='0')]
+		[InlineKeyboardButton(x, callback_data = None)]
 		)
 		keyboard.append(
 		#options
 		[
-		InlineKeyboardButton("AM", callback_data='1'),
-		InlineKeyboardButton("PM", callback_data='1'),
-		InlineKeyboardButton("In", callback_data='1'),
-		InlineKeyboardButton("OFF", callback_data='1'),
-		InlineKeyboardButton("LVE", callback_data='1'),
-		InlineKeyboardButton("CSE", callback_data='1'),
-		InlineKeyboardButton("OS", callback_data='1'),
+		InlineKeyboardButton("AM", callback_data=[index,'0','AM \u2714']),
+		InlineKeyboardButton("PM", callback_data=[index,'1','PM \u2714']),
+		InlineKeyboardButton("IN", callback_data=[index,'2','IN \u2714']),
+		InlineKeyboardButton("OFF", callback_data=[index,'3','OFF \u2714']),
+		InlineKeyboardButton("MC", callback_data=[index,'4','MC \u2714']),
+		InlineKeyboardButton("CSE", callback_data=[index,'5','CSE \u2714']),
+		InlineKeyboardButton("OS", callback_data=[index,'6','OS \u2714']),
 		],
 		)
+		index += 1
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
-# def receive_poll_answer(update: Update, context: CallbackContext) -> None:
-#     """Summarize a users poll vote"""
-#     answer = update.poll_answer
-#     poll_id = answer.poll_id
-#     try:
-#         questions = context.bot_data[poll_id]["questions"]
-#     # this means this poll answer update is from an old poll, we can't do our answering then
-#     except KeyError:
-#         return
-#     selected_options = answer.option_ids
-#     answer_string = ""
-#     for question_id in selected_options:
-#         if question_id != selected_options[-1]:
-#             answer_string += questions[question_id] + " and "
-#         else:
-#             answer_string += questions[question_id]
-#     context.bot.send_message(
-#         context.bot_data[poll_id]["chat_id"],
-#         f"{update.effective_user.mention_html()} feels {answer_string}!",
-#         parse_mode=ParseMode.HTML,
-#     )
-#     context.bot_data[poll_id]["answers"] += 1
-#     # Close poll after three participants voted
-#     if context.bot_data[poll_id]["answers"] == 3:
-#         context.bot.stop_poll(
-#             context.bot_data[poll_id]["chat_id"], context.bot_data[poll_id]["message_id"]
-#         )
+def button(update: Update, _: CallbackContext) -> None:
 
+	query = update.callback_query
+	query.answer()
 
-# def quiz(update: Update, context: CallbackContext) -> None:
-#     """Send a predefined poll"""
-#     questions = ["1", "2", "4", "20"]
-#     message = update.effective_message.reply_poll(
-#         "How many eggs do you need for a cake?", questions, type=Poll.QUIZ, correct_option_id=2
-#     )
-#     # Save some info about the poll the bot_data for later use in receive_quiz_answer
-#     payload = {
-#         message.poll.id: {"chat_id": update.effective_chat.id, "message_id": message.message_id}
-#     }
-#     context.bot_data.update(payload)
+	target = query.data
 
+	keyboard[target[0]][target[1]] = InlineKeyboardButton(target[2],callback_data=None)
 
-# def receive_quiz_answer(update: Update, context: CallbackContext) -> None:
-#     """Close quiz after three participants took it"""
-#     # the bot can receive closed poll updates we don't care about
-#     if update.poll.is_closed:
-#         return
-#     if update.poll.total_voter_count == 3:
-#         try:
-#             quiz_data = context.bot_data[update.poll.id]
-#         # this means this poll answer update is from an old poll, we can't stop it then
-#         except KeyError:
-#             return
-#         context.bot.stop_poll(quiz_data["chat_id"], quiz_data["message_id"])
-
-
-# def preview(update: Update, _: CallbackContext) -> None:
-#     """Ask user to create a poll and display a preview of it"""
-#     # using this without a type lets the user chooses what he wants (quiz or poll)
-#     button = [[KeyboardButton("Press me!", request_poll=KeyboardButtonPollType())]]
-#     message = "Press the button to let the bot generate a preview for your poll"
-#     # using one_time_keyboard to hide the keyboard
-#     update.effective_message.reply_text(
-#         message, reply_markup=ReplyKeyboardMarkup(button, one_time_keyboard=True)
-#     )
-
-
-# def receive_poll(update: Update, _: CallbackContext) -> None:
-#     """On receiving polls, reply to it by a closed poll copying the received poll"""
-#     actual_poll = update.effective_message.poll
-#     # Only need to set the question and options, since all other parameters don't matter for
-#     # a closed poll
-#     update.effective_message.reply_poll(
-#         question=actual_poll.question,
-#         options=[o.text for o in actual_poll.options],
-#         # with is_closed true, the poll/quiz is immediately closed
-#         is_closed=True,
-#         reply_markup=ReplyKeyboardRemove(),
-#     )
-
-
-def help_handler(update: Update, _: CallbackContext) -> None:
-    """Display a help message"""
-    update.message.reply_text('help')
-
+	reply_markup = InlineKeyboardMarkup(keyboard)
+	query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -196,27 +112,16 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/update\n"), updateMembers))
     dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw "), cawpaw))
+    #for button
+    #dispatcher.add_handler(CallbackQueryHandler(button))
     
     #dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
 
     #can remove when done
     dispatcher.add_handler(CommandHandler('members', members))
-    
-
-
-    # dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))
-    # dispatcher.add_handler(CommandHandler('quiz', quiz))
-    # dispatcher.add_handler(PollHandler(receive_quiz_answer))
-    # dispatcher.add_handler(CommandHandler('preview', preview))
-    # dispatcher.add_handler(MessageHandler(Filters.poll, receive_poll))
-    # dispatcher.add_handler(CommandHandler('help', help_handler))
-
-    # Start the Bot
-    #updater.start_polling()
 
     #added to deploy to heroku
     updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN,webhook_url='https://cawpawbot.herokuapp.com/'+TOKEN)
-    #updater.bot.setWebhook(webhook_url='https://cawpawbot.herokuapp.com/'+TOKEN)
 
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT

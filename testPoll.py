@@ -92,9 +92,6 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
-   
-
-
 # def receive_poll_answer(update: Update, context: CallbackContext) -> None:
 #     """Summarize a users poll vote"""
 #     answer = update.poll_answer
@@ -187,8 +184,8 @@ def main() -> None:
     updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^/update\n"), updateMembers))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^/cawpaw\n"), cawpaw))
+    dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/update\n"), updateMembers))
+    dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw\n"), cawpaw))
     
     #dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
 

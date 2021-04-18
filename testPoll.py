@@ -48,7 +48,7 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 
 
 keyboard = []
-tempKeyboard = []
+#tempKeyboard = []
 date = "___"
 
 def start(update: Update, _: CallbackContext) -> None:
@@ -101,7 +101,7 @@ def members(update: Update, context: CallbackContext) -> None:
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	tempKeyboard.clear()
+	#tempKeyboard.clear()
 	tempKeyboard = keyboard.copy()
 	reply_markup = InlineKeyboardMarkup(tempKeyboard)
 	#reply_markup = InlineKeyboardMarkup(keyboard)

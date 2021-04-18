@@ -99,6 +99,7 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
 	
+	keyboard[0]='pp'
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 

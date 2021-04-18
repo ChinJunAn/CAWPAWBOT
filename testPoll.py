@@ -64,32 +64,60 @@ def members(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_text(context.chat_data["flightMembers"])
 
-#keyboard = []
-date = "___"
+# #keyboard = []
+# date = "___"
+# def cawpaw(update: Update, context: CallbackContext) -> None:
+
+# 	date = update.message.text[8:]
+# 	index = 0
+# 	keyboard = []
+# 	for x in context.chat_data["flightMembers"]:
+# 		keyboard.append(
+# 		#name
+# 		[InlineKeyboardButton(x, callback_data = 1)]
+# 		)
+# 		keyboard.append(
+# 		InlineKeyboardButton("test option", callback_data=1),
+# 		#options
+# 		# [
+# 		# InlineKeyboardButton("AM", callback_data=str(index,'0','AM \u2714') ),
+# 		# InlineKeyboardButton("PM", callback_data=str(index,'1','PM \u2714') ),
+# 		# InlineKeyboardButton("IN", callback_data=str(index,'2','IN \u2714') ),
+# 		# InlineKeyboardButton("OFF", callback_data=str(index,'3','OFF \u2714') ),
+# 		# InlineKeyboardButton("MC", callback_data=str(index,'4','MC \u2714') ),
+# 		# InlineKeyboardButton("CSE", callback_data=str(index,'5','CSE \u2714') ),
+# 		# InlineKeyboardButton("OS", callback_data=str(index,'6','OS \u2714') ),
+# 		# ],
+# 		)
+# 		index += 1
+
+# 	reply_markup = InlineKeyboardMarkup(keyboard)
+# 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
+
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	index = 0
+
 	keyboard = []
+
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name
-		[InlineKeyboardButton(x, callback_data = 1)]
+		[InlineKeyboardButton(x, callback_data = None)]
 		)
 		keyboard.append(
-		InlineKeyboardButton("test option", callback_data=1),
 		#options
-		# [
-		# InlineKeyboardButton("AM", callback_data=str(index,'0','AM \u2714') ),
-		# InlineKeyboardButton("PM", callback_data=str(index,'1','PM \u2714') ),
-		# InlineKeyboardButton("IN", callback_data=str(index,'2','IN \u2714') ),
-		# InlineKeyboardButton("OFF", callback_data=str(index,'3','OFF \u2714') ),
-		# InlineKeyboardButton("MC", callback_data=str(index,'4','MC \u2714') ),
-		# InlineKeyboardButton("CSE", callback_data=str(index,'5','CSE \u2714') ),
-		# InlineKeyboardButton("OS", callback_data=str(index,'6','OS \u2714') ),
-		# ],
+		[
+		InlineKeyboardButton("AM", callback_data='1'),
+		InlineKeyboardButton("PM", callback_data='1'),
+		InlineKeyboardButton("IN", callback_data='1'),
+		InlineKeyboardButton("OFF", callback_data='1'),
+		InlineKeyboardButton("LVE", callback_data='1'),
+		InlineKeyboardButton("MC", callback_data='1'),
+		InlineKeyboardButton("CSE", callback_data='1'),
+		InlineKeyboardButton("OS", callback_data='1'),
+		],
 		)
-		index += 1
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')

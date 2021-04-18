@@ -185,7 +185,7 @@ def main() -> None:
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/update\n"), updateMembers))
-    dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw$"), cawpaw))
+    dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw "), cawpaw))
     
     #dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
 

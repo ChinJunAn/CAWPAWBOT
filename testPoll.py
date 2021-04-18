@@ -141,14 +141,12 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	query.answer()
 
 	target = query.data
-	update.message.reply_text(target)
+	#update.message.reply_text(target)
 	#keyboard[target[0]][target[1]] = InlineKeyboardButton(target[2],callback_data='none')
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
-	query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
-
-
-
+	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
+	query.edit_message_text(text=target)
 
 
 

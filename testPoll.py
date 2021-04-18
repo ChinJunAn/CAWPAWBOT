@@ -65,6 +65,8 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 
 	index = 0
 	keyboard.clear()
+	optionlist = []
+	namelist = []
 	for x in context.chat_data["flightMembers"]:
 		#options
 		optionlist = [

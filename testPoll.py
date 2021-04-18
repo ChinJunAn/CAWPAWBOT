@@ -67,13 +67,12 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name
-		[InlineKeyboardButton(x, callback_data = 'none')]
-		)
-		keyboard.append(
+		[InlineKeyboardButton(x, callback_data = 'none')
 		#options
 		[
 		InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714'),
 		],
+		]
 		)
 		index += 1
 
@@ -98,8 +97,8 @@ def members(update: Update, context: CallbackContext) -> None:
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	
-	reply_markup = InlineKeyboardMarkup(keyboard)
+	tempKeyboard = keyboard
+	reply_markup = InlineKeyboardMarkup(tempKeyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
 
@@ -109,17 +108,16 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	query = update.callback_query
 	query.answer()
 
+	tempKeyboard = keyboard
+
 	target = query.data.split(',')
 
-
-
-
-	keyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
+	tempKeyboard[int(target[0])] [int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 	#query.edit_message_text(text=target)
-	query.edit_message_text(text=target, reply_markup=reply_markup, parse_mode='MarkdownV2')
+	query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
 
 

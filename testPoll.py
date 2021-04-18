@@ -73,21 +73,21 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 		[InlineKeyboardButton(date, callback_data ='0')],
 	]
 
-	for x in context.chat_data["flightMembers"]:
-		keyboard[date].append(
-		#name
-		[InlineKeyboardButton(context.chat_data["flightMembers"][x], callback_data ='0')],
-		#options
-		[
-		InlineKeyboardButton("AM", callback_data='1'),
-		InlineKeyboardButton("PM", callback_data='1'),
-		InlineKeyboardButton("In", callback_data='1'),
-		InlineKeyboardButton("OFF", callback_data='1'),
-		InlineKeyboardButton("LVE", callback_data='1'),
-		InlineKeyboardButton("CSE", callback_data='1'),
-		InlineKeyboardButton("OS", callback_data='1'),
-		],
-		)
+	# for x in context.chat_data["flightMembers"]:
+	# 	keyboard[date].append(
+	# 	#name
+	# 	[InlineKeyboardButton(context.chat_data["flightMembers"][x], callback_data ='0')],
+	# 	#options
+	# 	[
+	# 	InlineKeyboardButton("AM", callback_data='1'),
+	# 	InlineKeyboardButton("PM", callback_data='1'),
+	# 	InlineKeyboardButton("In", callback_data='1'),
+	# 	InlineKeyboardButton("OFF", callback_data='1'),
+	# 	InlineKeyboardButton("LVE", callback_data='1'),
+	# 	InlineKeyboardButton("CSE", callback_data='1'),
+	# 	InlineKeyboardButton("OS", callback_data='1'),
+	# 	],
+	# 	)
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Please choose:', reply_markup=reply_markup)
@@ -185,7 +185,7 @@ def main() -> None:
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/update\n"), updateMembers))
-    dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw\n"), cawpaw))
+    dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw$"), cawpaw))
     
     #dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
 

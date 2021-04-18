@@ -63,7 +63,7 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 	context.chat_data["flightMembers"] = members
 
 	index = 0
-	#keyboard = []
+	keyboard = []
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name

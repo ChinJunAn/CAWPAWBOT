@@ -122,7 +122,7 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	query.edit_message_text(text= target, reply_markup=reply_markup, parse_mode='MarkdownV2')
 
 
-def removeCheck(update: Update, _: CallbackContext) -> None:
+#def removeCheck(update: Update, _: CallbackContext) -> None:
 
 
 def main() -> None:

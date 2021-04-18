@@ -144,7 +144,7 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 	#query.edit_message_text(text=target)
-	query.edit_message_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
+	query.edit_message_text('new', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
 
 

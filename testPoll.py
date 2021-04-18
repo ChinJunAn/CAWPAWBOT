@@ -127,17 +127,17 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
-# def button(update: Update, _: CallbackContext) -> None:
+def addCheck(update: Update, _: CallbackContext) -> None:
 
-# 	query = update.callback_query
-# 	query.answer()
+	query = update.callback_query
+	query.answer()
 
-# 	target = query.data.split(',')
+	target = query.data.split(',')
 
-# 	keyboard[target[0]][target[1]] = InlineKeyboardButton(target[2],callback_data=None)
+	keyboard[target[0]][target[1]] = InlineKeyboardButton(target[2],callback_data='none')
 
-# 	reply_markup = InlineKeyboardMarkup(keyboard)
-# 	query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
+	reply_markup = InlineKeyboardMarkup(keyboard)
+	query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
@@ -147,8 +147,8 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/update\n"), updateMembers))
     dispatcher.add_handler(MessageHandler(Filters.text &Filters.regex("^/cawpaw "), cawpaw))
-    #for button
-    #dispatcher.add_handler(CallbackQueryHandler(button))
+    #make check appear
+    dispatcher.add_handler(CallbackQueryHandler(addCheck))
     
     #dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
 

@@ -64,12 +64,13 @@ def members(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_text(context.chat_data["flightMembers"])
 
-keyboard = []
+#keyboard = []
 date = "___"
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
 	index = 0
+	keyboard = []
 	for x in context.chat_data["flightMembers"]:
 		keyboard.append(
 		#name

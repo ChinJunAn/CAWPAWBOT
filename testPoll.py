@@ -68,8 +68,8 @@ def updateMembers(update: Update, context: CallbackContext) -> None:
 	for x in context.chat_data["flightMembers"]:
 		#options
 		optionlist = [
-			InlineKeyboardButton("AM", callback_data=str(index+',0,AM \u2714')),
-			InlineKeyboardButton("PM", callback_data=str(index+',1,PM \u2714'))
+			InlineKeyboardButton("AM", callback_data=str(index)+',0,AM \u2714'),
+			InlineKeyboardButton("PM", callback_data=str(index)+',1,PM \u2714')
 		]
 		#name
 		namelist = [

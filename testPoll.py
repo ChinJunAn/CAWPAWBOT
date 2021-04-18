@@ -97,8 +97,8 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 		keyboard.append(
 		#options
 		[
-		InlineKeyboardButton("AM", callback_data=str(optionindex)+',0,AM \u1F7E2'),
-		InlineKeyboardButton("PM", callback_data=str(optionindex)+',1,PM \u1F7E2')
+		InlineKeyboardButton("AM", callback_data=str(optionindex)+',0,AM `\u2714`'),
+		InlineKeyboardButton("PM", callback_data=str(optionindex)+',1,PM `\u2714`')
 		],
 		)
 		index = optionindex + 1

@@ -50,7 +50,7 @@ TOKEN = '1724307554:AAFAAOq5nkIM-XOPgfVnPB-KlYmYz7tKiIY'
 def start(update: Update, _: CallbackContext) -> None:
     """Inform user about what this bot can do"""
     update.message.reply_text(
-        'To update flight members, enter in the following format: \n\n!!\nperson1\nperson2\n.\n.\n.\n\n/cawpaw <date> to begin recording parade state for the specified date'
+        'To update flight members, enter in the following format: \n\n/update\nperson1\nperson2\n.\n.\n.\n\n/cawpaw <date> to begin recording parade state for the specified date'
     )
 
 def updateMembers(update: Update, context: CallbackContext) -> None:
@@ -64,16 +64,26 @@ def members(update: Update, context: CallbackContext) -> None:
 	
 	update.message.reply_text(context.chat_data["flightMembers"])
 
-
-
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
+	date = update.message.text[8:0]
+
 	keyboard = [
-		[InlineKeyboardButton(context.chat_data["flightMembers"][0], callback_data ='0')],
-		[
-			InlineKeyboardButton("Option 1", callback_data='1'),
-			InlineKeyboardButton("Option 2", callback_data='2'),
-		],
+		[InlineKeyboardButton(date, callback_data ='0')],
+
+		for x in context.chat_data["flightMembers"]:
+			#name
+			[InlineKeyboardButton(context.chat_data["flightMembers"][x], callback_data ='0')],
+			#options
+			[
+			InlineKeyboardButton("AM", callback_data='1'),
+			InlineKeyboardButton("PM", callback_data='1'),
+			InlineKeyboardButton("In", callback_data='1'),
+			InlineKeyboardButton("OFF", callback_data='2'),
+			InlineKeyboardButton("LVE", callback_data='1'),
+			InlineKeyboardButton("CSE", callback_data='1'),
+			InlineKeyboardButton("OS", callback_data='1'),
+			],
 	]
 	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Please choose:', reply_markup=reply_markup)
@@ -173,10 +183,14 @@ def main() -> None:
     updater = Updater(TOKEN, persistence = persistence)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^!!\n"), updateMembers))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^/update\n"), updateMembers))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command &Filters.regex("^/cawpaw\n"), cawpaw))
+    
+    #dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
+
     #can remove when done
     dispatcher.add_handler(CommandHandler('members', members))
-    dispatcher.add_handler(CommandHandler('cawpaw', cawpaw))
+    
 
 
     # dispatcher.add_handler(PollAnswerHandler(receive_poll_answer))

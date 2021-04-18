@@ -66,7 +66,7 @@ def members(update: Update, context: CallbackContext) -> None:
 
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
-	date = update.message.text[1:0]
+	date = update.message.text
 
 	keyboard = []
 

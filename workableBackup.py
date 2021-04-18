@@ -101,8 +101,7 @@ def members(update: Update, context: CallbackContext) -> None:
 def cawpaw(update: Update, context: CallbackContext) -> None:
 
 	date = update.message.text[8:]
-	tempKeyboard = keyboard.copy()
-	reply_markup = InlineKeyboardMarkup(tempKeyboard)
+	reply_markup = InlineKeyboardMarkup(keyboard)
 	update.message.reply_text('Parade state for *__'+date+'__*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
 def addCheck(update: Update, _: CallbackContext) -> None:
@@ -115,9 +114,9 @@ def addCheck(update: Update, _: CallbackContext) -> None:
 	#if have check, add check 
 	#if no have check, remove check
 
-	tempKeyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
+	keyboard[int(target[0])][int(target[1])] = InlineKeyboardButton(str(target[2]),callback_data='none')
 
-	reply_markup = InlineKeyboardMarkup(tempKeyboard)
+	reply_markup = InlineKeyboardMarkup(keyboard)
 	#query.edit_message_text(text= 'Parade state for *__'+date+'__*', reply_markup= reply_markup)
 	#query.edit_message_text(text=target)
 	query.edit_message_text(text= target, reply_markup=reply_markup, parse_mode='MarkdownV2')

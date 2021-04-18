@@ -87,7 +87,7 @@ def cawpaw(update: Update, context: CallbackContext) -> None:
 	# 	)
 
 	reply_markup = InlineKeyboardMarkup(keyboard)
-	update.message.reply_text('Parade state for '+date, reply_markup=reply_markup)
+	update.message.reply_text('Parade state for *_'+date+'_*', reply_markup=reply_markup, parse_mode='MarkdownV2')
 
 # def receive_poll_answer(update: Update, context: CallbackContext) -> None:
 #     """Summarize a users poll vote"""
